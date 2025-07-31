@@ -7,6 +7,10 @@ import rateLimit from 'express-rate-limit'
 import { errorHandler, notFound, setupGracefulShutdown } from '@/middleware'
 import { testDatabaseConnection } from '@/utils/database'
 import authRoutes from '@/routes/authRoutes'
+import userRoutes from '@/routes/userRoutes'
+import productRoutes from '@/routes/productRoutes'
+import categoryRoutes from '@/routes/categoryRoutes'
+import reviewRoutes from '@/routes/reviewRoutes'
 
 // Load environment variables
 dotenv.config()
@@ -51,23 +55,12 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/categories', categoryRoutes)
+app.use('/api/reviews', reviewRoutes)
 
 // Placeholder routes (to be implemented)
-app.use('/api/users', (req, res) => {
-  res.json({ message: 'User routes will be implemented here' })
-})
-
-app.use('/api/products', (req, res) => {
-  res.json({ message: 'Product routes will be implemented here' })
-})
-
-app.use('/api/categories', (req, res) => {
-  res.json({ message: 'Category routes will be implemented here' })
-})
-
-app.use('/api/reviews', (req, res) => {
-  res.json({ message: 'Review routes will be implemented here' })
-})
 
 app.use('/api/orders', (req, res) => {
   res.json({ message: 'Order routes will be implemented here' })
@@ -104,12 +97,42 @@ const startServer = async () => {
       console.log(`🔗 API Base URL: http://localhost:${PORT}/api`)
       console.log(`🔗 Auth endpoints: http://localhost:${PORT}/api/auth`)
       console.log('\n📝 Available endpoints:')
+      console.log('🔐 Auth endpoints:')
       console.log('  POST /api/auth/register - Register new user')
       console.log('  POST /api/auth/login - Login user')
       console.log('  GET  /api/auth/profile - Get user profile (protected)')
       console.log('  PUT  /api/auth/profile - Update user profile (protected)')
       console.log('  POST /api/auth/logout - Logout user (protected)')
       console.log('  GET  /api/auth/users - Get all users (admin only)')
+      console.log('\n👥 User endpoints:')
+      console.log('  GET  /api/users/profile - Get user profile (protected)')
+      console.log('  PUT  /api/users/profile - Update user profile (protected)')
+      console.log('  GET  /api/users/stats - Get user statistics (protected)')
+      console.log('  GET  /api/users/:id - Get user by ID (public)')
+      console.log('  GET  /api/users - Get all users (admin only)')
+      console.log('  DELETE /api/users/:id - Delete user (admin only)')
+      console.log('\n📦 Product endpoints:')
+      console.log('  GET  /api/products - Get all products (public)')
+      console.log('  GET  /api/products/search - Search products (public)')
+      console.log('  GET  /api/products/:id - Get product by ID (public)')
+      console.log('  POST /api/products - Create product (seller/admin)')
+      console.log('  PUT  /api/products/:id - Update product (owner/admin)')
+      console.log('  DELETE /api/products/:id - Delete product (owner/admin)')
+      console.log('  GET  /api/products/user/my-products - Get user products (protected)')
+      console.log('  GET  /api/products/category/:categoryId - Get products by category (public)')
+      console.log('\n📂 Category endpoints:')
+      console.log('  GET  /api/categories - Get all categories (public)')
+      console.log('  GET  /api/categories/:id - Get category by ID (public)')
+      console.log('  GET  /api/categories/:id/products - Get category products (public)')
+      console.log('  POST /api/categories - Create category (admin only)')
+      console.log('  PUT  /api/categories/:id - Update category (admin only)')
+      console.log('  DELETE /api/categories/:id - Delete category (admin only)')
+      console.log('\n⭐ Review endpoints:')
+      console.log('  GET  /api/reviews/product/:productId - Get product reviews (public)')
+      console.log('  POST /api/reviews/product/:productId - Create review (buyer/admin)')
+      console.log('  PUT  /api/reviews/:id - Update review (owner)')
+      console.log('  DELETE /api/reviews/:id - Delete review (owner)')
+      console.log('  GET  /api/reviews/user/my-reviews - Get user reviews (protected)')
       console.log('\n🔑 Test accounts (after seeding):')
       console.log('  Admin: admin@ecom-boh.com / admin123')
       console.log('  Seller: seller1@ecom-boh.com / seller123')

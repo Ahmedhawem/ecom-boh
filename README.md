@@ -55,6 +55,10 @@ Une plateforme e-commerce moderne inspirée de Tayara.tn, permettant aux utilisa
 - **Tailwind CSS** pour le styling
 - **React Icons** pour les icônes
 - **React Hook Form** pour les formulaires
+- **Framer Motion** pour les animations
+- **React Query** pour la gestion d'état serveur
+- **Zustand** pour la gestion d'état local
+- **Axios** pour les requêtes HTTP
 
 ### Backend
 - **Node.js** avec Express
@@ -62,6 +66,10 @@ Une plateforme e-commerce moderne inspirée de Tayara.tn, permettant aux utilisa
 - **Prisma** comme ORM
 - **PostgreSQL** comme base de données
 - **JWT** pour l'authentification
+- **Multer** pour l'upload de fichiers
+- **Cloudinary** pour le stockage d'images
+- **Helmet** pour la sécurité
+- **Rate Limiting** pour la protection
 
 ### Base de Données
 - **PostgreSQL** pour les données principales
@@ -83,22 +91,21 @@ git clone https://github.com/votre-username/ecom-boh.git
 cd ecom-boh
 ```
 
-2. **Installer les dépendances du backend**
+2. **Installer toutes les dépendances**
 ```bash
-cd backend
-npm install
+npm run install:all
 ```
 
 3. **Configurer la base de données**
 ```bash
 # Copier le fichier d'environnement
-cp env.example .env
+cp backend/env.example backend/.env
 
 # Modifier les variables d'environnement dans .env
 # DATABASE_URL="postgresql://username:password@localhost:5432/ecom_boh"
 
 # Générer le client Prisma
-npx prisma generate
+cd backend && npx prisma generate
 
 # Exécuter les migrations
 npx prisma migrate dev
@@ -107,27 +114,17 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
-4. **Installer les dépendances du frontend**
+4. **Démarrer le développement**
 ```bash
-cd ../frontend
-npm install
-```
-
-5. **Démarrer le développement**
-
-**Backend :**
-```bash
-cd backend
+# Démarrer backend et frontend simultanément
 npm run dev
+
+# Ou démarrer séparément :
+npm run dev:backend  # Port 5000
+npm run dev:frontend # Port 3000
 ```
 
-**Frontend :**
-```bash
-cd frontend
-npm run dev
-```
-
-Le frontend sera accessible sur `http://localhost:5173` et le backend sur `http://localhost:3000`.
+Le frontend sera accessible sur `http://localhost:3000` et le backend sur `http://localhost:5000`.
 
 ## 📁 Structure du Projet
 
@@ -140,17 +137,17 @@ ecom-boh/
 │   │   ├── routes/         # Routes API
 │   │   ├── services/       # Logique métier
 │   │   ├── types/          # Types TypeScript
-│   │   └── utils/          # Utilitaires
+│   │   ├── utils/          # Utilitaires
+│   │   └── lib/            # Bibliothèques
 │   ├── prisma/             # Schéma et migrations
 │   └── package.json
 ├── frontend/               # Application React
 │   ├── src/
 │   │   ├── components/     # Composants réutilisables
 │   │   ├── pages/          # Pages de l'application
-│   │   ├── services/       # Services API
 │   │   └── utils/          # Utilitaires
 │   └── package.json
-└── README.md
+└── package.json            # Scripts globaux
 ```
 
 ## 🎯 Fonctionnalités Similaires à Tayara.tn
@@ -164,10 +161,12 @@ ecom-boh/
 - **Publication d'annonces** avec upload d'images
 - **Interface responsive** mobile/desktop
 - **Design moderne** avec animations
+- **Système d'authentification** complet
+- **Gestion des catégories** de produits
 
 ### 🔄 **En cours de développement**
 - **Système d'avis** et évaluations
-- **Dashboard administrateur**
+- **Dashboard administrateur** avancé
 - **Notifications en temps réel**
 - **Système de paiement**
 - **Intégration API complète**
@@ -178,26 +177,28 @@ ecom-boh/
 |-------|--------|-------------|
 | **Phase 1: Planification** | ✅ Complétée | 100% |
 | **Phase 2: Base de Données** | ✅ Complétée | 100% |
-| **Phase 3: Backend** | 🔄 En cours | 25% |
-| **Phase 4: Frontend** | ✅ Majoritairement complétée | 85% |
-| **Phase 5: Intégration** | 🔄 En cours | 10% |
+| **Phase 3: Backend** | 🔄 En cours | 60% |
+| **Phase 4: Frontend** | ✅ Majoritairement complétée | 90% |
+| **Phase 5: Intégration** | 🔄 En cours | 30% |
 | **Phase 6: Déploiement** | 🔄 À faire | 0% |
 
-**Progression globale**: ~60%
+**Progression globale**: ~75%
 
 ## 🎨 Interface Utilisateur
 
 ### Design Moderne
 - **Tailwind CSS** pour un design cohérent
-- **Animations fluides** et transitions
+- **Animations fluides** avec Framer Motion
 - **Interface responsive** adaptée à tous les écrans
 - **Loading states** et états vides informatifs
+- **Toast notifications** pour le feedback utilisateur
 
 ### Expérience Utilisateur
 - **Navigation intuitive** avec breadcrumbs
 - **Recherche instantanée** avec filtres
 - **Galerie d'images** interactive
 - **Formulaires guidés** pour la publication
+- **Gestion d'état optimisée** avec React Query
 
 ## 🔧 Configuration
 
@@ -205,13 +206,17 @@ ecom-boh/
 ```env
 DATABASE_URL="postgresql://username:password@localhost:5432/ecom_boh"
 JWT_SECRET="votre-secret-jwt"
-PORT=3000
+PORT=5000
 NODE_ENV=development
+CORS_ORIGIN=http://localhost:3000
+CLOUDINARY_CLOUD_NAME="votre-cloud-name"
+CLOUDINARY_API_KEY="votre-api-key"
+CLOUDINARY_API_SECRET="votre-api-secret"
 ```
 
 ### Variables d'Environnement Frontend
 ```env
-VITE_API_URL=http://localhost:3000/api
+VITE_API_URL=http://localhost:5000/api
 ```
 
 ## 🧪 Tests
@@ -230,12 +235,24 @@ npm test
 
 ## 📦 Scripts Disponibles
 
+### Scripts Globaux
+```bash
+npm run dev              # Démarre backend + frontend
+npm run dev:backend      # Démarre seulement le backend
+npm run dev:frontend     # Démarre seulement le frontend
+npm run build            # Build backend + frontend
+npm run install:all      # Installe toutes les dépendances
+npm run db:migrate       # Exécute les migrations
+npm run db:seed          # Insère les données de test
+```
+
 ### Backend
 ```bash
 npm run dev          # Démarrage en mode développement
 npm run build        # Build de production
 npm run start        # Démarrage en mode production
 npm run test         # Exécution des tests
+npm run db:studio    # Ouvre Prisma Studio
 ```
 
 ### Frontend
@@ -245,6 +262,32 @@ npm run build        # Build de production
 npm run preview      # Prévisualisation du build
 npm run test         # Exécution des tests
 ```
+
+## 🚀 Nouvelles Fonctionnalités
+
+### ✅ **Backend API Complète**
+- **Authentification JWT** avec refresh tokens
+- **API des utilisateurs** avec gestion de profil
+- **API des produits** avec CRUD complet
+- **API des catégories** pour la classification
+- **API des avis** pour les évaluations
+- **Upload d'images** avec Cloudinary
+- **Middleware de sécurité** (Helmet, Rate Limiting)
+- **Gestion d'erreurs** centralisée
+
+### ✅ **Frontend Avancé**
+- **Gestion d'état optimisée** avec React Query et Zustand
+- **Animations fluides** avec Framer Motion
+- **Formulaires robustes** avec React Hook Form
+- **Notifications toast** avec React Hot Toast
+- **Interface responsive** complète
+- **Galerie d'images** interactive
+
+### ✅ **Base de Données**
+- **Schéma Prisma** complet avec relations
+- **Migrations** pour la gestion des versions
+- **Seeders** pour les données de test
+- **Indexation** pour les performances
 
 ## 🤝 Contribution
 

@@ -83,7 +83,7 @@ export const authenticate = async (
     }
 
     req.user = user
-    next()
+    return next()
   } catch (error) {
     console.error('Auth middleware error:', error)
     return res.status(500).json({
@@ -125,10 +125,10 @@ export const optionalAuth = async (
       }
     }
 
-    next()
+    return next()
   } catch (error) {
     // Continue without authentication
-    next()
+    return next()
   }
 }
 
@@ -149,7 +149,7 @@ export const authorize = (...roles: UserRole[]) => {
       })
     }
 
-    next()
+    return next()
   }
 }
 
@@ -180,7 +180,7 @@ export const checkOwnership = (resourceType: 'product' | 'review' | 'order') => 
       }
 
       const resourceId = req.params.id
-      let resource
+      let resource: any
 
       switch (resourceType) {
         case 'product':
@@ -223,7 +223,7 @@ export const checkOwnership = (resourceType: 'product' | 'review' | 'order') => 
         })
       }
 
-      next()
+      return next()
     } catch (error) {
       console.error('Ownership check error:', error)
       return res.status(500).json({

@@ -18,7 +18,7 @@ export class AuthService {
 
     return jwt.sign(payload, process.env.JWT_SECRET!, {
       expiresIn: process.env.JWT_EXPIRES_IN || '7d',
-    })
+    } as jwt.SignOptions)
   }
 
   // Register new user
@@ -267,7 +267,7 @@ export class AuthService {
     }
   }
 
-  // Verify token
+  // Verify token and return user
   static async verifyToken(token: string): Promise<UserWithoutPassword> {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any
@@ -290,7 +290,7 @@ export class AuthService {
       })
 
       if (!user || !user.isActive) {
-        throw new AppError('Token invalide', 401)
+        throw new AppError('Utilisateur non trouvé ou désactivé', 401)
       }
 
       return user
@@ -301,7 +301,10 @@ export class AuthService {
       if (error instanceof jwt.TokenExpiredError) {
         throw new AppError('Token expiré', 401)
       }
-      throw new AppError('Erreur de vérification du token', 500)
+      if (error instanceof AppError) {
+        throw error
+      }
+      throw new AppError('Erreur lors de la vérification du token', 500)
     }
   }
 
@@ -316,6 +319,12 @@ export class AuthService {
           firstName: true,
           lastName: true,
           role: true,
+          phone: true,
+          address: true,
+          avatar: true,
+          isActive: true,
+          createdAt: true,
+          updatedAt: true,
         },
       })
 

@@ -14,12 +14,12 @@ export const handleValidationErrors = (
       success: false,
       message: 'Données invalides',
       errors: errors.array().map(error => ({
-        field: error.path,
+        field: error.type === 'field' ? error.path : 'unknown',
         message: error.msg,
       })),
     })
   }
-  next()
+  return next()
 }
 
 // User validation rules
@@ -349,5 +349,57 @@ export const validateProductFilters = [
     .trim()
     .isLength({ min: 2, max: 100 })
     .withMessage('La recherche doit contenir entre 2 et 100 caractères'),
+  handleValidationErrors,
+]
+
+// Product validation rules
+export const validateProduct = [
+  body('title')
+    .trim()
+    .isLength({ min: 3, max: 100 })
+    .withMessage('Le titre doit contenir entre 3 et 100 caractères'),
+  body('description')
+    .trim()
+    .isLength({ min: 10, max: 1000 })
+    .withMessage('La description doit contenir entre 10 et 1000 caractères'),
+  body('price')
+    .isFloat({ min: 0.01 })
+    .withMessage('Le prix doit être un nombre positif'),
+  body('categoryId')
+    .isUUID()
+    .withMessage('ID de catégorie invalide'),
+  body('stock')
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage('Le stock doit être un nombre entier positif'),
+  body('images')
+    .optional()
+    .isArray()
+    .withMessage('Les images doivent être un tableau'),
+  body('images.*')
+    .optional()
+    .isURL()
+    .withMessage('URL d\'image invalide'),
+  handleValidationErrors,
+]
+
+// Category validation rules
+export const validateCategory = [
+  body('name')
+    .trim()
+    .isLength({ min: 2, max: 50 })
+    .withMessage('Le nom doit contenir entre 2 et 50 caractères')
+    .matches(/^[a-zA-ZÀ-ÿ\s&'-]+$/)
+    .withMessage('Le nom ne peut contenir que des lettres, espaces, tirets, apostrophes et &'),
+  body('description')
+    .optional()
+    .trim()
+    .isLength({ max: 500 })
+    .withMessage('La description ne peut pas dépasser 500 caractères'),
+  body('icon')
+    .optional()
+    .trim()
+    .isLength({ max: 50 })
+    .withMessage('L\'icône ne peut pas dépasser 50 caractères'),
   handleValidationErrors,
 ] 
