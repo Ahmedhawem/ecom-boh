@@ -1,215 +1,269 @@
-# Modern E-Commerce Platform
+# 🛒 E-Commerce Boh - Plateforme Marketplace
 
-## Project Overview
+Une plateforme e-commerce moderne inspirée de Tayara.tn, permettant aux utilisateurs d'acheter et vendre des produits avec une interface intuitive et des fonctionnalités avancées.
 
-This is a modern, full-stack e-commerce platform that allows users to buy and sell products with advanced features including user management, product categories, reviews, and admin dashboard.
+## ✨ Fonctionnalités Principales
 
-## Features
+### 🏠 **Page d'Accueil**
+- Design moderne avec sections héro
+- Présentation des fonctionnalités principales
+- Navigation intuitive vers les annonces
 
-### For Sellers (Product Owners)
-- **User Registration & Authentication**: Secure account creation and login system
-- **Product Management**: Add, edit, and manage products with detailed information
-- **Product Information**: Upload product photos, descriptions, prices, and specifications
-- **Category Management**: Organize products into categories
-- **Contact Information**: Display seller contact details for customer inquiries
-- **Product Reviews**: Receive and manage customer reviews
-- **Admin Approval**: Products require admin approval before being published
+### 🔍 **Recherche et Filtrage**
+- Recherche par mot-clé dans les titres et descriptions
+- Filtrage par catégories (Véhicules, Immobilier, Électronique, etc.)
+- Tri par prix (croissant/décroissant) et date
+- Affichage du nombre de résultats trouvés
 
-### For Buyers (Customers)
-- **User Registration**: Create accounts to purchase products
-- **Product Browsing**: Browse products by categories with search functionality
-- **Product Details**: View comprehensive product information, photos, and seller details
-- **Contact Sellers**: Direct communication with product owners
-- **Leave Reviews**: Rate and review purchased products
-- **Secure Transactions**: Safe purchasing process
+### 📱 **Interface des Annonces**
+- Affichage en grille responsive
+- Cartes d'annonces avec images, prix, localisation
+- Informations du vendeur et date de publication
+- États de chargement et messages informatifs
 
-### For Administrators
-- **Admin Dashboard**: Comprehensive platform management interface
-- **Product Approval**: Review and approve/reject new product submissions
-- **User Management**: Monitor and manage user accounts
-- **Category Management**: Create and manage product categories
-- **Content Moderation**: Moderate reviews and announcements
-- **Platform Analytics**: View platform statistics and insights
+### 🖼️ **Galerie de Produits**
+- Galerie d'images avec miniatures
+- Navigation entre les photos
+- Image principale mise en avant
+- Interface intuitive pour visualiser les produits
 
-## Technical Stack
+### 👤 **Profil Utilisateur Complet**
+- **Onglet Profil** : Informations personnelles et statistiques
+- **Onglet Mes Annonces** : Gestion des annonces avec statuts
+- **Onglet Messages** : Système de messagerie
+- **Onglet Paramètres** : Modification des informations
+
+### 📝 **Publication d'Annonces**
+- Processus en 3 étapes guidé
+- **Étape 1** : Création du compte utilisateur
+- **Étape 2** : Détails de l'annonce (titre, catégorie, prix, description)
+- **Étape 3** : Upload d'images et finalisation
+- Validation des données et acceptation des termes
+
+### 💬 **Système de Contact**
+- Modal de contact pour contacter les vendeurs
+- Formulaire avec nom, téléphone et message
+- Informations détaillées du vendeur
+- Conseils de sécurité pour les transactions
+
+## 🛠️ Technologies Utilisées
 
 ### Frontend
-- **React.js** - Modern UI framework with hooks
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Modern, responsive styling
-- **Framer Motion** - Beautiful animations and transitions
-- **React Router** - Client-side routing
-- **Axios** - HTTP client for API calls
+- **React 18** avec TypeScript
+- **Vite** pour le build et le développement
+- **React Router** pour la navigation
+- **Tailwind CSS** pour le styling
+- **React Icons** pour les icônes
+- **React Hook Form** pour les formulaires
 
 ### Backend
-- **Node.js** - Server runtime
-- **Express.js** - Web application framework
-- **TypeScript** - Type-safe backend development
-- **JWT** - Authentication and authorization
-- **Multer** - File upload handling
-- **Bcrypt** - Password hashing
+- **Node.js** avec Express
+- **TypeScript** pour le typage
+- **Prisma** comme ORM
+- **PostgreSQL** comme base de données
+- **JWT** pour l'authentification
 
-### Database
-- **PostgreSQL** - Relational database
-- **Prisma** - Type-safe database client
-- **Redis** - Caching and session management
+### Base de Données
+- **PostgreSQL** pour les données principales
+- **Schéma Prisma** avec relations complètes
+- **Migrations** pour la gestion des versions
 
-### Additional Technologies
-- **Docker** - Containerization
-- **AWS S3** - File storage for images
-- **Stripe** - Payment processing
-- **Nodemailer** - Email notifications
+## 🚀 Installation et Démarrage
 
-## Database Schema
-
-### Core Entities
-- **Users**: User accounts with roles (buyer, seller, admin)
-- **Products**: Product listings with categories, prices, and details
-- **Categories**: Product categorization system
-- **Reviews**: User reviews and ratings
-- **Orders**: Purchase transactions
-- **Announcements**: Platform announcements
-- **Contact Messages**: Communication between users
-
-## Installation & Setup
-
-### Prerequisites
-- Node.js (v18+)
+### Prérequis
+- Node.js (version 18 ou supérieure)
 - PostgreSQL
-- Redis
-- Docker (optional)
+- npm ou yarn
 
-### Environment Variables
-```env
-# Database
-DATABASE_URL="postgresql://username:password@localhost:5432/ecommerce_db"
+### Installation
 
-# JWT
-JWT_SECRET="your-secret-key"
-
-# Redis
-REDIS_URL="redis://localhost:6379"
-
-# AWS S3
-AWS_ACCESS_KEY_ID="your-access-key"
-AWS_SECRET_ACCESS_KEY="your-secret-key"
-AWS_REGION="us-east-1"
-AWS_BUCKET_NAME="your-bucket-name"
-
-# Stripe
-STRIPE_SECRET_KEY="your-stripe-secret-key"
-STRIPE_PUBLISHABLE_KEY="your-stripe-publishable-key"
-
-# Email
-SMTP_HOST="smtp.gmail.com"
-SMTP_PORT=587
-SMTP_USER="your-email@gmail.com"
-SMTP_PASS="your-app-password"
-```
-
-### Development Setup
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Set up environment variables
-4. Run database migrations: `npm run db:migrate`
-5. Start development server: `npm run dev`
-
-## Project Structure
-
-```
-├── frontend/                 # React frontend application
-│   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── services/       # API services
-│   │   ├── utils/          # Utility functions
-│   │   └── types/          # TypeScript type definitions
-│   └── public/             # Static assets
-├── backend/                 # Node.js backend application
-│   ├── src/
-│   │   ├── controllers/    # Route controllers
-│   │   ├── middleware/     # Express middleware
-│   │   ├── models/         # Database models
-│   │   ├── routes/         # API routes
-│   │   ├── services/       # Business logic
-│   │   └── utils/          # Utility functions
-│   └── prisma/             # Database schema and migrations
-├── docs/                   # Documentation
-└── docker/                 # Docker configuration
-```
-
-## API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/auth/logout` - User logout
-- `GET /api/auth/me` - Get current user
-
-### Products
-- `GET /api/products` - Get all products
-- `GET /api/products/:id` - Get product by ID
-- `POST /api/products` - Create new product (seller only)
-- `PUT /api/products/:id` - Update product (owner only)
-- `DELETE /api/products/:id` - Delete product (owner only)
-
-### Categories
-- `GET /api/categories` - Get all categories
-- `POST /api/categories` - Create category (admin only)
-
-### Reviews
-- `GET /api/products/:id/reviews` - Get product reviews
-- `POST /api/products/:id/reviews` - Add review (buyer only)
-
-### Admin
-- `GET /api/admin/products/pending` - Get pending products
-- `PUT /api/admin/products/:id/approve` - Approve product
-- `PUT /api/admin/products/:id/reject` - Reject product
-
-## Security Features
-
-- **JWT Authentication**: Secure token-based authentication
-- **Role-based Access Control**: Different permissions for buyers, sellers, and admins
-- **Input Validation**: Comprehensive input sanitization
-- **File Upload Security**: Secure image upload with validation
-- **Rate Limiting**: API rate limiting to prevent abuse
-- **CORS Protection**: Cross-origin resource sharing protection
-
-## Performance Optimizations
-
-- **Image Optimization**: Automatic image compression and resizing
-- **Caching**: Redis caching for frequently accessed data
-- **Database Indexing**: Optimized database queries
-- **Lazy Loading**: Component and image lazy loading
-- **CDN Integration**: Content delivery network for static assets
-
-## Deployment
-
-### Production Setup
-1. Set up production environment variables
-2. Build frontend: `npm run build`
-3. Start production server: `npm start`
-4. Set up reverse proxy (Nginx)
-5. Configure SSL certificates
-
-### Docker Deployment
+1. **Cloner le repository**
 ```bash
-docker-compose up -d
+git clone https://github.com/votre-username/ecom-boh.git
+cd ecom-boh
 ```
 
-## Contributing
+2. **Installer les dépendances du backend**
+```bash
+cd backend
+npm install
+```
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+3. **Configurer la base de données**
+```bash
+# Copier le fichier d'environnement
+cp env.example .env
 
-## License
+# Modifier les variables d'environnement dans .env
+# DATABASE_URL="postgresql://username:password@localhost:5432/ecom_boh"
 
-This project is licensed under the MIT License.
+# Générer le client Prisma
+npx prisma generate
 
-## Support
+# Exécuter les migrations
+npx prisma migrate dev
 
-For support and questions, please contact the development team. 
+# Seeder la base de données (optionnel)
+npx prisma db seed
+```
+
+4. **Installer les dépendances du frontend**
+```bash
+cd ../frontend
+npm install
+```
+
+5. **Démarrer le développement**
+
+**Backend :**
+```bash
+cd backend
+npm run dev
+```
+
+**Frontend :**
+```bash
+cd frontend
+npm run dev
+```
+
+Le frontend sera accessible sur `http://localhost:5173` et le backend sur `http://localhost:3000`.
+
+## 📁 Structure du Projet
+
+```
+ecom-boh/
+├── backend/                 # API Backend
+│   ├── src/
+│   │   ├── controllers/    # Contrôleurs API
+│   │   ├── middleware/     # Middlewares Express
+│   │   ├── routes/         # Routes API
+│   │   ├── services/       # Logique métier
+│   │   ├── types/          # Types TypeScript
+│   │   └── utils/          # Utilitaires
+│   ├── prisma/             # Schéma et migrations
+│   └── package.json
+├── frontend/               # Application React
+│   ├── src/
+│   │   ├── components/     # Composants réutilisables
+│   │   ├── pages/          # Pages de l'application
+│   │   ├── services/       # Services API
+│   │   └── utils/          # Utilitaires
+│   └── package.json
+└── README.md
+```
+
+## 🎯 Fonctionnalités Similaires à Tayara.tn
+
+### ✅ **Implémentées**
+- **Recherche avancée** avec filtres multiples
+- **Affichage en grille** des annonces
+- **Galerie d'images** avec navigation
+- **Système de contact** entre utilisateurs
+- **Gestion de profil** complète
+- **Publication d'annonces** avec upload d'images
+- **Interface responsive** mobile/desktop
+- **Design moderne** avec animations
+
+### 🔄 **En cours de développement**
+- **Système d'avis** et évaluations
+- **Dashboard administrateur**
+- **Notifications en temps réel**
+- **Système de paiement**
+- **Intégration API complète**
+
+## 📊 État du Projet
+
+| Phase | Statut | Progression |
+|-------|--------|-------------|
+| **Phase 1: Planification** | ✅ Complétée | 100% |
+| **Phase 2: Base de Données** | ✅ Complétée | 100% |
+| **Phase 3: Backend** | 🔄 En cours | 25% |
+| **Phase 4: Frontend** | ✅ Majoritairement complétée | 85% |
+| **Phase 5: Intégration** | 🔄 En cours | 10% |
+| **Phase 6: Déploiement** | 🔄 À faire | 0% |
+
+**Progression globale**: ~60%
+
+## 🎨 Interface Utilisateur
+
+### Design Moderne
+- **Tailwind CSS** pour un design cohérent
+- **Animations fluides** et transitions
+- **Interface responsive** adaptée à tous les écrans
+- **Loading states** et états vides informatifs
+
+### Expérience Utilisateur
+- **Navigation intuitive** avec breadcrumbs
+- **Recherche instantanée** avec filtres
+- **Galerie d'images** interactive
+- **Formulaires guidés** pour la publication
+
+## 🔧 Configuration
+
+### Variables d'Environnement Backend
+```env
+DATABASE_URL="postgresql://username:password@localhost:5432/ecom_boh"
+JWT_SECRET="votre-secret-jwt"
+PORT=3000
+NODE_ENV=development
+```
+
+### Variables d'Environnement Frontend
+```env
+VITE_API_URL=http://localhost:3000/api
+```
+
+## 🧪 Tests
+
+### Backend
+```bash
+cd backend
+npm test
+```
+
+### Frontend
+```bash
+cd frontend
+npm test
+```
+
+## 📦 Scripts Disponibles
+
+### Backend
+```bash
+npm run dev          # Démarrage en mode développement
+npm run build        # Build de production
+npm run start        # Démarrage en mode production
+npm run test         # Exécution des tests
+```
+
+### Frontend
+```bash
+npm run dev          # Démarrage du serveur de développement
+npm run build        # Build de production
+npm run preview      # Prévisualisation du build
+npm run test         # Exécution des tests
+```
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créer une branche pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`)
+3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+## 📝 License
+
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+
+## 📞 Support
+
+Pour toute question ou problème :
+- Ouvrir une issue sur GitHub
+- Contacter l'équipe de développement
+
+---
+
+**Développé avec ❤️ pour créer une plateforme e-commerce moderne et intuitive** 
