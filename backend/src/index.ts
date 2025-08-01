@@ -11,6 +11,7 @@ import userRoutes from '@/routes/userRoutes'
 import productRoutes from '@/routes/productRoutes'
 import categoryRoutes from '@/routes/categoryRoutes'
 import reviewRoutes from '@/routes/reviewRoutes'
+import adminRoutes from '@/routes/adminRoutes'
 
 // Load environment variables
 dotenv.config()
@@ -59,6 +60,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/reviews', reviewRoutes)
+app.use('/api/admin', adminRoutes)
 
 // Placeholder routes (to be implemented)
 
